@@ -5,28 +5,51 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: #ffffff;
+  color: #171717;
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.card {
+  background-color: #f3f4f6;
+  transition: background-color 0.3s;
+}
+
+.card:hover {
+  background-color: #ffffff;
+}
+
+body.dark {
+  background-color: #171717;
+  color: #ffffff;
+}
+
+body.dark .card {
+  background-color: #1a1a1a;
+}
+
+body.dark .card:hover {
+  background-color: #2a2a2a;
 }
 @media screen and (min-width: 1400px) {
   .container {
     max-width: 1400px;
     margin: 0 auto;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #171717;
+    color: #ffffff;
+  }
+
+  .card {
+    background-color: #1a1a1a;
+  }
+
+  .card:hover {
+    background-color: #2a2a2a;
   }
 }
