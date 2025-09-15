@@ -10,8 +10,8 @@ export default function Footer() {
             <Image
               src="/logoo1.png"
               alt="logo"
-              width={30}
-              height={20}
+              width={34}
+              height={22}
               priority
               className="sm:w-[30px] sm:h-[20px] w-[25px] h-[16px]"
             />

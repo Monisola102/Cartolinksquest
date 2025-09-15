@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import LogoImg from "@/public/logo2.png"; // Your logo image
+import Logo from "./logo";
 import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { GoHomeFill } from "react-icons/go";
@@ -42,8 +41,6 @@ export default function Header() {
     TbUserEdit,
     GiBoltCutter,
   ];
-
-  // Dark/light toggle
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add("dark");
@@ -54,7 +51,6 @@ export default function Header() {
 
   return (
     <header className="w-full flex items-center justify-between px-4 sm:px-8 py-2 relative">
-      {/* Left */}
       <div className="flex items-center gap-3">
         <button
           className="md:hidden p-2 rounded-full hover:bg-gray-200 transition"
@@ -62,11 +58,7 @@ export default function Header() {
         >
           <HiOutlineMenu size={24} />
         </button>
-
-        {/* Logo */}
-        <Image src={LogoImg} alt="Logo" width={120} height={40} className="object-contain" />
-
-        {/* Select */}
+        <Logo/>
         <div className="relative">
           <div
             className="absolute left-2 top-1/2 -translate-y-1/2 
@@ -92,8 +84,6 @@ export default function Header() {
           </select>
         </div>
       </div>
-
-      {/* Middle icons */}
       <div className="hidden md:flex items-center gap-1 lg:gap-4 bg-gray-100 rounded-full px-2 py-1">
         {middleIcons.map((Icon, i) => (
           <div
