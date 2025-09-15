@@ -1,11 +1,11 @@
 "use client";
 
 import Logo from "./logo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { GoHomeFill } from "react-icons/go";
 import { RiGalleryFill, RiPhoneCameraFill } from "react-icons/ri";
-import { BsCameraVideoFill, BsBrightnessHighFill } from "react-icons/bs";
+import { BsCameraVideoFill, BsBrightnessHighFill, BsMoon } from "react-icons/bs";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { TbUserEdit } from "react-icons/tb";
 import { GiBoltCutter } from "react-icons/gi";
@@ -30,6 +30,7 @@ export default function Header() {
   const [value, setValue] = useState<string>(options[0].value);
   const [toggleActive, setToggleActive] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const middleIcons = [
     GoHomeFill,
@@ -41,8 +42,18 @@ export default function Header() {
     GiBoltCutter,
   ];
 
+  // Update document class for dark/light mode
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
   return (
     <header className="w-full flex items-center justify-between px-4 sm:px-8 py-2 relative">
+      {/* Left */}
       <div className="flex items-center gap-3">
         <button
           className="md:hidden p-2 rounded-full hover:bg-gray-200 transition"
@@ -86,6 +97,8 @@ export default function Header() {
           </select>
         </div>
       </div>
+
+      {/* Middle icons */}
       <div className="hidden md:flex items-center gap-1 lg:gap-4 bg-gray-100 rounded-full px-2 py-1">
         {middleIcons.map((Icon, i) => (
           <div
@@ -96,6 +109,8 @@ export default function Header() {
           </div>
         ))}
       </div>
+
+      {/* Right */}
       <div className="flex items-center gap-3 sm:gap-4">
         <div className="hidden sm:flex items-center gap-1 p-2 bg-gray-100 rounded-full hover:bg-white transition-colors duration-200 cursor-pointer">
           <GrGallery />
@@ -111,8 +126,16 @@ export default function Header() {
           <IoNotifications className="text-[20px]" />
         </div>
 
-        <div className="p-2 bg-gray-100 rounded-full hover:bg-white transition-colors duration-200 cursor-pointer">
-          <BsBrightnessHighFill className="text-[20px]" />
+        {/* Toggle dark/light mode */}
+        <div
+          onClick={() => setDarkMode(!darkMode)}
+          className="p-2 bg-gray-100 rounded-full hover:bg-white transition-colors duration-200 cursor-pointer"
+        >
+          {darkMode ? (
+            <BsBrightnessHighFill className="text-[20px]" />
+          ) : (
+            <BsMoon className="text-[20px]" />
+          )}
         </div>
 
         <div
@@ -125,6 +148,8 @@ export default function Header() {
                 transition-shadow duration-200`}
         />
       </div>
+
+      {/* Sidebar */}
       {sidebarOpen && (
         <div className="fixed inset-0 bg-black/30 z-50">
           <div className="absolute top-0 left-0 w-60 h-full bg-white p-4 shadow-lg flex flex-col gap-3">
