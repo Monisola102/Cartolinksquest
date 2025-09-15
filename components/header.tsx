@@ -1,6 +1,7 @@
 "use client";
 
-import Logo from "./logo";
+import Image from "next/image";
+import LogoImg from "@/public/logo2.png"; // Your logo image
 import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { GoHomeFill } from "react-icons/go";
@@ -42,12 +43,12 @@ export default function Header() {
     GiBoltCutter,
   ];
 
-  // Update document class for dark/light mode
+  // Dark/light toggle
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     } else {
-      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
     }
   }, [darkMode]);
 
@@ -62,7 +63,10 @@ export default function Header() {
           <HiOutlineMenu size={24} />
         </button>
 
-        <Logo />
+        {/* Logo */}
+        <Image src={LogoImg} alt="Logo" width={120} height={40} className="object-contain" />
+
+        {/* Select */}
         <div className="relative">
           <div
             className="absolute left-2 top-1/2 -translate-y-1/2 
@@ -78,20 +82,11 @@ export default function Header() {
           <select
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            className="
-              text-[9px] sm:text-[10px] md:text-xs
-              w-full pl-12 pr-8 py-2
-              rounded-full
-              bg-gray-100 text-gray-700
-              shadow-[4px_4px_8px_#d1d5db,-4px_-4px_8px_#ffffff]
-              focus:outline-none focus:ring-0
-              appearance-none
-            "
+            className="text-[9px] sm:text-[10px] md:text-xs w-full pl-12 pr-8 py-2 rounded-full bg-gray-100 text-gray-700 shadow-md focus:outline-none appearance-none"
           >
             {options.map((o) => (
               <option key={o.value} value={o.value}>
-                <span className="hidden md:inline">{o.label}</span>
-                <span className="inline md:hidden">{o.short}</span>
+                {o.label} {/* plain text only */}
               </option>
             ))}
           </select>
@@ -131,11 +126,7 @@ export default function Header() {
           onClick={() => setDarkMode(!darkMode)}
           className="p-2 bg-gray-100 rounded-full hover:bg-white transition-colors duration-200 cursor-pointer"
         >
-          {darkMode ? (
-            <BsBrightnessHighFill className="text-[20px]" />
-          ) : (
-            <BsMoon className="text-[20px]" />
-          )}
+          {darkMode ? <BsBrightnessHighFill className="text-[20px]" /> : <BsMoon className="text-[20px]" />}
         </div>
 
         <div
